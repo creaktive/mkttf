@@ -88,3 +88,18 @@ bsdtar -c --format zip --gid 0 --uid 0 -f "../terminus-ttf-${VARIANT}${FONTVER}-
     -s "|^.*/terminus_ttf_distribution_license\.txt$|terminus-ttf-${VARIANT}${FONTVER}-windows/COPYING|" \
     -s "|^.*/|terminus-ttf-${VARIANT}${FONTVER}-windows/|" \
     {Normal,Bold,Italic,Bold\ Italic}/*.ttf "${MYDIR}/terminus_ttf_distribution_license.txt"
+
+
+# 3. Generate fonts WITH OSX-specific fixes and zip them.
+mkdir -p ../osx
+cd ../osx
+
+if [ -z "$ZIP_ONLY" ]; then
+    rm -rf Normal Bold Italic 'Bold Italic'
+    "${MYDIR}/mkttf.sh" "${FONTSRCDIR}" "${FONTVER}" "Terminus" "Terminus" -F dfont
+fi
+
+bsdtar -c --format zip --gid 0 --uid 0 -f "../terminus-ttf-${VARIANT}${FONTVER}-mac.zip" \
+    -s "|^.*/terminus_ttf_distribution_license\.txt$|terminus-ttf-${VARIANT}${FONTVER}-mac/COPYING|" \
+    -s "|^.*/|terminus-ttf-${VARIANT}${FONTVER}-mac/|" \
+    {Normal,Bold,Italic,Bold\ Italic}/*.dfont "${MYDIR}/terminus_ttf_distribution_license.txt"

@@ -2,14 +2,14 @@
 #
 # This Python script uses FontForge to convert a set of BDF files into a
 # TrueType font (TTF) and an SFD file.
-# 
+#
 # Copyright (c) 2013-2016 by Tilman Blumenbach <tilman [AT] ax86 [DOT] net>
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
 # met:
-# 
+#
 # * Redistributions of source code must retain the above copyright
 #   notice, this list of conditions and the following disclaimer.
 # * Redistributions in binary form must reproduce the above
@@ -19,7 +19,7 @@
 # * Neither the name of the author nor the names of its contributors
 #   may be used to endorse or promote products derived from this
 #   software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -161,6 +161,12 @@ def initArgumentParser():
             help='Tweak OS/2 table according to the font weight. This may be needed for some '
                  'buggy FontForge versions which do not do this by themselves.'
     )
+    argParser.add_argument(
+            '-F',
+            '--format',
+            default='ttf',
+            help='Output format (default: ttf)'
+    )
 
     return argParser
 
@@ -301,7 +307,7 @@ if baseFont.version != '':
     basename += '-' + baseFont.version
 
 print('Saving TTF file...')
-baseFont.generate(basename + '.ttf', 'ttf')
+baseFont.generate(basename + '.' + args.format, args.format)
 
 print('Saving SFD file...')
 baseFont.save(basename + '.sfd')

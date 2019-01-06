@@ -105,4 +105,8 @@ docs/_build/
 # PyBuilder
 target/
 
-
+# Build process artifacts
+osx/
+other_systems/
+windows/
+terminus-*
